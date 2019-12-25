@@ -1,0 +1,63 @@
+@startuml
+
+title 状态模式
+scale 1.3
+
+package com.zws.design.state.lift <<Frame>>{
+    abstract class LiftState{
+        Content content;
+        + void open();
+        + void close();
+        + void stop();
+        + void run();
+    }
+
+    class OpeningState{
+        + void close();
+    }
+
+    class RunningState{
+        + void stop();
+    }
+
+    class StopingState{
+        + void open();
+        + void run();
+    }
+
+    class ClosingState{
+        + void run();
+        + void stop();
+        + void open();
+    }
+}
+
+package com.zws.design.state <<Frame>>{
+     class Content{
+             LiftState state;
+             ..
+             void setState(LiftState state);
+             --
+             + void open();
+             + void close();
+             + void stop();
+             + void run();
+         }
+ }
+
+ package com.zws.design.test <<Frame>>{
+     class StateTest{
+        Content content;
+        + void main();
+     }
+ }
+    Content -|> LiftState: extend
+    Content -> LiftState: Association
+    LiftState -> Content: Association
+    OpeningState -up-|> LiftState: extend
+    RunningState -up-|> LiftState: extend
+    StopingState -up-|> LiftState: extend
+    ClosingState -left-|> LiftState: extend
+    StateTest-up-> Content: create
+    StateTest-right-> OpeningState: create
+@enduml

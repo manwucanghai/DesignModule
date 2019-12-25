@@ -1,0 +1,18 @@
+@startuml
+scale 1.4
+left to right direction
+actor 消费者
+actor 销售员
+rectangle 买单 {
+    消费者 -- (买单)
+    (买单) .> (付款) : include
+    (帮助) .> (买单) : extends
+    (买单) .. 销售员
+}
+@enduml
+
+说明：
+使用 actor 来定义参与者
+rectangle 圈住内容.
+使用括号 (xxx) 来表示用例，用例用椭圆形表达
+使用不同的线条表达不同的关系。
