@@ -45,7 +45,7 @@ package com.zws.design.state <<Frame>>{
          }
  }
 
- package com.zws.design.test <<Frame>>{
+ package com.zws.design.state.test <<Frame>>{
      class StateTest{
         Content content;
         + void main();
