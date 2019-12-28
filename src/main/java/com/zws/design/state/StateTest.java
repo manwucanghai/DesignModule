@@ -1,6 +1,6 @@
 package com.zws.design.state;
 
-import com.zws.design.state.lift.OpeningState;
+import com.zws.design.state.lift.StateEnum;
 
 /**
  * @author zhengws
@@ -8,7 +8,7 @@ import com.zws.design.state.lift.OpeningState;
  */
 public class StateTest {
     public static void main(String[] args) {
-        Context context = new Context(new OpeningState());
+        Context context = new Context(StateEnum.OPENINGSTATE.state);
         context.close();
         context.run();
         context.stop();

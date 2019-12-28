@@ -1,4 +1,4 @@
-package com.zws.design.command;
+package com.zws.design.command.example1;
 
 import java.util.LinkedHashSet;
 

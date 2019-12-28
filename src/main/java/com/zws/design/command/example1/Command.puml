@@ -1,0 +1,49 @@
+@startuml
+scale 1.3
+
+interface Receiver{
+    + void action();
+}
+
+class DeleteReceiver implements Receiver{
+    + void action();
+}
+
+class SelectReceiver implements Receiver{
+    + void action();
+}
+
+abstract class Command{
+    Receiver receiver;
+    + void execute();
+}
+
+class DeleteCommand{
+    + void execute();
+}
+
+class SelectCommand{
+    + void execute();
+}
+
+class Invoker{
+     - LinkedHashSet<Command> cmds;
+     + void addCmd(Command cmd);
+     + void removeCmd(Command cmd);
+     + void action();
+ }
+
+ class Test {
+     + void main();
+ }
+
+Command *-> Receiver: 组合
+Invoker .down.> Command: 关联
+Invoker o-down-> Command: 聚合
+SelectCommand .> SelectReceiver: create
+SelectCommand -up-|> Command
+DeleteCommand .> DeleteReceiver: create
+DeleteCommand -up-|> Command
+Test .> Invoker: create
+Test .> SelectCommand: create
+@enduml

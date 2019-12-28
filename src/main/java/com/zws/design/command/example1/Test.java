@@ -1,4 +1,4 @@
-package com.zws.design.command;
+package com.zws.design.command.example1;
 
 /**
  * @author zhengws
@@ -11,8 +11,12 @@ public class Test {
         Invoker invoker = new Invoker();
         invoker.addCommand(selectCommand);
         invoker.addCommand(deleteCommand);
-        invoker.removeCommand(selectCommand);
+//        invoker.removeCommand(selectCommand);
         invoker.action();
 
+        /**
+         * 执行查询操作...
+         * 开始执行删除操作...
+         */
     }
 }
