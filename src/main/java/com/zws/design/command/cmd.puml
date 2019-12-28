@@ -1,0 +1,30 @@
+@startuml
+scale 1.3
+class Invoker{
+    + void action();
+}
+interface Command {
+    - void execute();
+}
+interface Receiver{
+    + void action();
+}
+
+Invoker o-right- Command
+Client .right.> Invoker : create
+Client ..> ConcreteCommand : create
+ConcreteCommand .up.|> Command
+ConcreteCommand -> Receiver
+ConcreteReceiver .up.|> Receiver
+@enduml
+
+scale 生成图片倍数
+默认的，字段和方法是由PlantUML自动分组的，你也可以使用: – .. == __ 这些分隔符手动进行分组
+up、down、left、right定义线的起始方位。
+PlantUML用下面的符号来表示类之间的关系：
+泛化，Generalization：<|–
+关联，Association：<–
+组合，Composition：*–
+聚合，Aggregation：o–
+实现，Realization：<|..
+依赖，Dependency：<..
