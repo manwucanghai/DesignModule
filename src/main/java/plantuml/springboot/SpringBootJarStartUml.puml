@@ -1,0 +1,51 @@
+@startuml
+
+scale 1.3
+
+interface Archive {
+    + URL getUrl();
+    + Manifest getManifest();
+    + List<Archive> getNestedArchives(EntryFilter filter);
+}
+
+class Manifest{
+
+}
+abstract class Launcher{
+    launch(String[] args);
+    createClassLoader(List<Archive> archives);
+    ClassLoader createClassLoader(URL[] urls);
+    void launch(String[] args, String mainClass, ClassLoader classLoader);
+    createMainMethodRunner(String mainClass, String[] args,
+    			ClassLoader classLoader);
+
+
+}
+
+abstract class ExecutableArchiveLauncher extends Launcher{
+    - Archive archive;
+    --
+    Archive createArchive();
+    List<Archive> getClassPathArchives();
+}
+
+
+class JarLauncher extends ExecutableArchiveLauncher {
+    + main(args);
+}
+
+class MainMethodRunner{
+    void run();
+}
+
+class LaunchedURLClassLoader extends URLClassLoader{
+
+}
+
+
+JarFileArchive .up.|> Archive
+ExecutableArchiveLauncher -> JarFileArchive: create
+Launcher -up-> MainMethodRunner: create
+Launcher -left> LaunchedURLClassLoader: create
+Archive -up-> Manifest
+@enduml

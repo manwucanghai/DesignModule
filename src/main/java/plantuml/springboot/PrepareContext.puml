@@ -1,0 +1,17 @@
+@startuml
+SpringApplication -> SpringApplication : prepareContext
+SpringApplication -> SpringApplication : load(context, sources);
+SpringApplication -> SpringApplication : getBeanDefinitionRegistry(context); //获取bean registry
+SpringApplication -> SpringApplication : createBeanDefinitionLoader(registry, sources); //创建定义bean加载器
+SpringApplication -> BeanDefinitionLoader: load() 加载应用入口类到reader中
+BeanDefinitionLoader -> AnnotatedBeanDefinitionReader: register(classes); //注册bean.
+AnnotatedBeanDefinitionReader -> AnnotatedBeanDefinitionReader: doRegisterBean
+AnnotatedBeanDefinitionReader -> AnnotatedGenericBeanDefinition: new() 创建注解通用bean定义
+AnnotatedBeanDefinitionReader -> AnnotationConfigUtils: processCommonDefinitionAnnotations
+AnnotatedBeanDefinitionReader -> BeanDefinitionHolder: new() 创建
+AnnotatedBeanDefinitionReader -> AnnotationConfigUtils: applyScopedProxyMode() 判断创建代理模式
+AnnotatedBeanDefinitionReader -> BeanDefinitionReaderUtils: registerBeanDefinition() 注册bean.
+BeanDefinitionReaderUtils -> GenericApplicationContext: registerBeanDefinition() 注册bean.
+GenericApplicationContext -> DefaultListableBeanFactory: registerBeanDefinition() 注册bean
+
+@enduml

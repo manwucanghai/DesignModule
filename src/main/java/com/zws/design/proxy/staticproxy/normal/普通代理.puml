@@ -1,0 +1,31 @@
+@startuml
+
+scale 1.3
+interface IGamePlayer{
+    void login(String username, String password);
+    void killBoss();
+    void upgrade();
+}
+
+class GamePlayerProxy implements IGamePlayer{
+    - IGamePlayer player;
+    + GamePlayerProxy(String name); //在构造函数中直接初始化被代理类
+    + void login(String username, String password);
+    + void killBoss();
+    + void upgrade();
+}
+
+class GamePlayer implements IGamePlayer{
+    + GamePlayer(IGamePlayer player, String name); //在构造函数中判断是否传入代理类
+    + void login(String username, String password);
+    + void killBoss();
+    + void upgrade();
+}
+
+class Client{
+    + main();
+}
+
+Client -up-> GamePlayerProxy : create
+
+@enduml

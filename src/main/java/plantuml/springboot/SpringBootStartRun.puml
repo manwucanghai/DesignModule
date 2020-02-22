@@ -1,0 +1,15 @@
+@startuml
+scale 1.3
+== 创建SpringApplication并设置服务类型 ==
+MyApplication -> SpringApplication: run()
+SpringApplication -> SpringApplication: create
+SpringApplication -> WebApplicationType:deduceFromClasspath()判断服务类型
+== 设置Initializer 和 Listeners ==
+SpringApplication -> SpringApplication: getSpringFactoriesInstances(ApplicationContextInitializer.class)
+SpringApplication -> SpringApplication: getClassLoader()
+SpringApplication -> SpringFactoriesLoader: loadFactoryNames()
+SpringFactoriesLoader -> SpringFactoriesLoader: loadSpringFactories(classLoader)
+SpringApplication ->SpringApplication:createSpringFactoriesInstances(type, parameterTypes, classLoader, args, names)
+== 设置主方法所在实例 ==
+SpringApplication->SpringApplication:deduceMainApplicationClass()
+@enduml
